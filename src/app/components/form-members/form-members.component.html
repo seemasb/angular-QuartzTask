@@ -1,0 +1,25 @@
+<form [formGroup]="memberFormValues" (ngSubmit)="onSubmit()">
+  <div class="column-flex">
+    <label>ID:</label>
+    <input type="number" formControlName="id" />
+  </div>
+  <div class="column-flex">
+    <label>First Name:</label>
+    <input type="text" formControlName="firstName" />
+  </div>
+  <div class="column-flex">
+    <label>Second Name:</label>
+    <input type="text" formControlName="secondName" />
+  </div>
+  <div class="column-flex">
+    <label>Final Name: </label>
+    <input type="text" formControlName="finalName" />
+  </div>
+  <div class="column-flex">
+    <label>Age:</label>
+    <input type="number" formControlName="age" />
+  </div>
+    <button type="submit" [disabled]="!memberFormValues.valid">
+      Add Member
+    </button>
+</form>
