@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit , Output , EventEmitter } from '@angular/core';
-import { FormControl, FormGroup , ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup , ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-form-members',
@@ -11,11 +11,11 @@ import { FormControl, FormGroup , ReactiveFormsModule } from '@angular/forms';
 })
 export class FormMembersComponent implements OnInit {
   memberFormValues = new FormGroup({
-    id: new FormControl(''),
-    firstName: new FormControl(''),
-    secondName: new FormControl(''),
-    finalName: new FormControl(''),
-    age: new FormControl(''),
+    id: new FormControl('', [Validators.required]),
+    firstName: new FormControl('', [Validators.required]),
+    secondName: new FormControl('', [Validators.required]),
+    finalName: new FormControl('', [Validators.required]),
+    age: new FormControl('', [Validators.required, Validators.min(0)]), // Assuming age should be a non-negative number
   });
 
   @Output() memberAdded = new EventEmitter<any>()

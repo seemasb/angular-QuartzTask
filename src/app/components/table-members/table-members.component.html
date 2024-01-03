@@ -11,6 +11,7 @@
       <th>Second Name</th>
       <th>Final Name</th>
       <th>Age</th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
@@ -20,6 +21,9 @@
       <td>{{ member.secondName }}</td>
       <td>{{ member.finalName }}</td>
       <td>{{ member.age }}</td>
+      <td>
+        <button (click)="deleteMember(member)">Delete</button>
+      </td>
     </tr>
   </tbody>
 </table>

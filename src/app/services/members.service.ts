@@ -1,18 +1,26 @@
+// members.service.ts
+
 import { Injectable } from '@angular/core';
+import { DexieService } from './dexie.service';
+import { memberTemplate } from '../models/member';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MembersService {
-  private members = [{ id: 1, firstName: 'John', secondName: 'Doe', finalName: 'John Doe', age: 25 },]
-constructor() { }
+  constructor(private dexieService: DexieService) {}
 
-getMembers = ()=>{
-  return this.members
+  async getMembers(): Promise<memberTemplate[]> {
+    return this.dexieService.getMembers();
+  }
+
+  async addMember(newMember: memberTemplate){
+     this.dexieService.addMember(newMember);
+  }
+
+  async deleteMember(deletedMember: number){
+    console.log('members service' , deletedMember)
+    this.dexieService.deleteMember(deletedMember);
+ }
 }
 
-addMember = (newMember : any)=>{
-  this.members.push(newMember)
-  console.log(this.members)
-}
-}
