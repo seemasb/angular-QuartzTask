@@ -1,33 +1,35 @@
 <div class="table-view">
-<button (click)="openAddMemberModal()">Add Member</button>
+  <div class="table-header">
+    <h2>Members Table</h2>
+    <button (click)="openAddMemberModal()">Add Member</button>
+  </div>
 
-<!-- ////////////////// Mmebers Table //////////////// -->
+  <!-- ////////////////// Mmebers Table //////////////// -->
 
-<table>
-  <thead>
-    <tr>
-      <th>ID</th>
-      <th>First Name</th>
-      <th>Second Name</th>
-      <th>Final Name</th>
-      <th>Age</th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let member of members">
-      <td>{{ member.id }}</td>
-      <td>{{ member.firstName }}</td>
-      <td>{{ member.secondName }}</td>
-      <td>{{ member.finalName }}</td>
-      <td>{{ member.age }}</td>
-      <td>
-        <button (click)="deleteMember(member)">Delete</button>
-      </td>
-    </tr>
-  </tbody>
-</table>
-
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>First Name</th>
+        <th>Second Name</th>
+        <th>Final Name</th>
+        <th>Age</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let member of members">
+        <td>{{ member.id }}</td>
+        <td>{{ member.firstName }}</td>
+        <td>{{ member.secondName }}</td>
+        <td>{{ member.finalName }}</td>
+        <td>{{ member.age }}</td>
+        <td style="width: 60px;">
+          <button (click)="deleteMember(member)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 </div>
 
 <!-- ////////////////// Mmebers Modal //////////////// -->
@@ -35,7 +37,7 @@
 <div *ngIf="membersModalShow" class="modal">
   <div class="modal-content">
     <span class="close" (click)="closeAddMemberModal()">&times;</span>
-    <app-form-members (memberAdded)="addMember($event)"></app-form-members>
+    <app-form-members (memberAdded)="addMember($event)" [errorMessage] = "errorMessage"></app-form-members>
   </div>
 </div>
 <!-- (memberAdded)="onMemberAdded($event)" -->

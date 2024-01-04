@@ -14,6 +14,7 @@ import { memberTemplate } from '../../models/member';
 export class TableMembersComponent implements OnInit {
   members: memberTemplate[] = [];
   membersModalShow: boolean = false;
+  errorMessage: string = ''
 
   constructor(private MembersService: MembersService) {}
 
@@ -33,15 +34,22 @@ export class TableMembersComponent implements OnInit {
   };
 
   async addMember(newMember: any) {
-    await this.MembersService.addMember(newMember);
-    this.loadMembers();
-    this.closeAddMemberModal()
+    await this.MembersService.addMember(newMember)
+      .then((result) => {
+        console.log('Operation succeeded:', result);
+        this.loadMembers();
+        this.closeAddMemberModal();
+        alert('Member added Successfully!')
+      })
+      .catch((error) => {
+        this.errorMessage = error.message
+        console.error('Operation failed:', error);
+      });
   }
 
   async deleteMember(deletedMember: memberTemplate) {
-    console.log('table' , deletedMember)
+    console.log('table', deletedMember);
     await this.MembersService.deleteMember(deletedMember.id);
     this.loadMembers();
   }
-
 }

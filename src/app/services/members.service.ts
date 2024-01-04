@@ -1,26 +1,38 @@
-// members.service.ts
-
 import { Injectable } from '@angular/core';
-import { DexieService } from './dexie.service';
 import { memberTemplate } from '../models/member';
+import Dexie from 'dexie';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
-export class MembersService {
-  constructor(private dexieService: DexieService) {}
+export class MembersService extends Dexie {
+  membersDB: Dexie.Table<memberTemplate, number>;
 
-  async getMembers(): Promise<memberTemplate[]> {
-    return this.dexieService.getMembers();
+  constructor() {
+    super('membersDatabase');
+
+    // Define the schema and version
+    this.version(1).stores({
+      //table name and columns
+      members: 'id,firstName,secondName,finalName,age'
+    });
+
+    // Assign the table initilized above
+    this.membersDB = this.table('members');
   }
 
-  async addMember(newMember: memberTemplate){
-     this.dexieService.addMember(newMember);
+  getMembers(): Promise<memberTemplate[]> {
+    return this.membersDB.toArray();
   }
 
-  async deleteMember(deletedMember: number){
-    console.log('members service' , deletedMember)
-    this.dexieService.deleteMember(deletedMember);
+  async addMember(newMember: memberTemplate): Promise<any> {
+    return this.membersDB.add(newMember).catch(error => {
+      return Promise.reject(error);
+    });
+  }
+
+  deleteMember(deletedMember: number) {
+    this.membersDB.delete(deletedMember);
  }
-}
 
+}

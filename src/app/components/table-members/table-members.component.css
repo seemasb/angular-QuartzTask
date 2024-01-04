@@ -1,7 +1,16 @@
+.table-view{
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    margin: auto;
+}
+.table-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 table {
   border-collapse: collapse;
-  width: 60%;
-  margin: auto;
   overflow-y: auto;
   max-height: 300px;
   border: 1px solid #ddd;
@@ -11,7 +20,7 @@ th,
 td {
   border: 1px solid #ddd;
   padding: 10px;
-  text-align: left;
+  text-align: center;
 }
 
 th {
@@ -20,7 +29,9 @@ th {
   font-size: 16px;
   font-weight: 400;
 }
-
+td:last-child {
+    white-space: nowrap !important;
+  }
 button {
   padding: 10px;
   background-color: #4caf50;
@@ -29,7 +40,8 @@ button {
   cursor: pointer;
   border-radius: 5px;
   font-size: 16px;
-  /* float: right; */
+  float: right;
+  /* width: 150px; */
 }
 
 button:hover {

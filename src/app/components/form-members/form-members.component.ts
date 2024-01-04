@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit , Output , EventEmitter } from '@angular/core';
+import { Component, OnInit , Output , EventEmitter , Input} from '@angular/core';
 import { FormControl, FormGroup , ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
@@ -19,6 +19,7 @@ export class FormMembersComponent implements OnInit {
   });
 
   @Output() memberAdded = new EventEmitter<any>()
+  @Input() errorMessage : string = ''
 
   onSubmit = ()=>{
     console.log(this.memberFormValues.value)
